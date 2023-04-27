@@ -1,8 +1,22 @@
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
-INHERIT: mkdocs/base.yml  # use the shared AutoRA configuration by default
+INHERIT: docs/base.yml  # use the shared AutoRA configuration by default
 
 site_name: AutoRA DARTS Theorist
 repo_url: 'https://github.com/autoresearch/autora-darts'
+
+#plugins:
+#  multirepo:
+#    imported_repo: true
+#    url: file://Users/`jholla10/Developer/autora
+#    section_name: DARTS
+#    # dirs/files needed for building the site
+#    # any path in docs will be included. For example, index.md is the
+#    # homepage of the parent site
+#    paths: ["mkdocs/*", "mkdocs.yml", "docs/*"]
+#    custom_dir: mkdocs
+#    yml_file: mkdocs.yml # this can also be a relative path
+#    branch: main
+
 
 nav:
 - Introduction: 'index.md'
@@ -12,5 +26,5 @@ nav:
 - Search space: 'search_space.md'
 - Examples:
   - Basic Usage: 'example.ipynb'
-  - Weber-Fechner Law: 'weber.ipynb'
+#  - Weber-Fechner Law: 'weber.ipynb'
 - Code Reference: reference/
