@@ -3,7 +3,7 @@
 `autora-theorist-darts` is a Python module for fitting data using differentiable architecture 
 search, built on AutoRA.
 
-Website: [empiricalresearch.ai](https://empiricalresearch.ai/autora/theorist/darts/)
+Website: [https://autoresearch.github.io/autora/](https://autoresearch.github.io/autora/)
 
 ## User Guide
 
@@ -74,7 +74,7 @@ pip install -e ".[dev]"
 
 Update the metadata under `project` in the pyproject.toml file to include name, description, author-name, author-email and version
 
-- Follow the guide here: https://packaging.python.org/en/latest/tutorials/packaging-projects/
+- Follow the guide here: [https://packaging.python.org/en/latest/tutorials/packaging-projects/](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
 
 Build the package using:
 ```shell

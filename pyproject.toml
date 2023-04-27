@@ -28,7 +28,7 @@ dev = [
 
 [project.urls]
 homepage = "https://www.empiricalresearch.ai"
-repository = "https://github.com/AutoResearch/autora-theorist-template"
+repository = "https://github.com/AutoResearch/autora-theorist-darts"
 documentation = "https://autoresearch.github.io/autora/"
 
 [build-system]
