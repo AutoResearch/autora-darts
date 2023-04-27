@@ -9,7 +9,7 @@ Website: [https://autoresearch.github.io/autora/](https://autoresearch.github.io
 
 You will need:
 
-- `python` 3.8 or greater: [https://www.python.org/downloads/](https://www.python.org/downloads/)
+- `python` 3.8.2 or greater: [https://www.python.org/downloads/](https://www.python.org/downloads/)
 - `graphviz` (optional, required for computation graph visualizations): 
   [https://graphviz.org/download/](https://graphviz.org/download/)
 
