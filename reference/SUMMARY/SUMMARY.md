@@ -1,0 +1,11 @@
+* autora
+    * theorist
+        * [darts](autora/theorist/darts/index.md)
+            * [architect](autora/theorist/darts/architect.md)
+            * [dataset](autora/theorist/darts/dataset.md)
+            * [fan_out](autora/theorist/darts/fan_out.md)
+            * [model_search](autora/theorist/darts/model_search.md)
+            * [operations](autora/theorist/darts/operations.md)
+            * [regressor](autora/theorist/darts/regressor.md)
+            * [utils](autora/theorist/darts/utils.md)
+            * [visualize](autora/theorist/darts/visualize.md)
