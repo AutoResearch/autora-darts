@@ -1,6 +1,6 @@
 [project]
 # UPDATE THIS BEFORE PUBLISHING
-name = "autora-darts"
+name = "autora-theorist-darts"
 description = "Differentiable Architecture Search theorist for AutoRA"
 authors = [
     { name = "Sebastian Musslick", email = "sebastian_musslick@brown.edu" },
@@ -8,15 +8,17 @@ authors = [
 ]
 dynamic = ["version"]
 
-readme = "README.md"
+readme = "docs/introduction.md"
 license = { text = "MIT License" }
-requires-python = ">=3.8.10,<3.11"
+requires-python = ">=3.8.10,<4.0"
 
 dependencies = [
     "autora-core",
     "scikit-learn",
     "torch",
-    "tqdm"
+    "matplotlib",
+    "graphviz",
+    "tqdm",
 ]
 
 [project.optional-dependencies]
