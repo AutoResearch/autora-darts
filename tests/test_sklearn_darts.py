@@ -6,14 +6,14 @@ import pytest
 import torch
 from sklearn.model_selection import GridSearchCV, train_test_split
 
-from autora.skl.darts import (
+from autora.theorist.darts import (
     PRIMITIVES,
     DARTSExecutionMonitor,
     DARTSRegressor,
     DARTSType,
-    ValueType,
 )
 
+from autora.variable import ValueType
 
 @pytest.fixture
 def seed():

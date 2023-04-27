@@ -15,20 +15,15 @@ from sklearn.base import BaseEstimator, RegressorMixin
 from sklearn.utils.validation import check_array, check_is_fitted, check_X_y
 from tqdm.auto import tqdm
 
-from autora.theorist.darts import (
-    PRIMITIVES,
-    Architect,
-    AvgrageMeter,
-    DARTSType,
-    Network,
-    darts_dataset_from_ndarray,
-    darts_model_plot,
-    format_input_target,
-    get_loss_function,
-    get_output_format,
-    get_output_str,
-)
 from autora.variable import ValueType
+
+from .operations import PRIMITIVES
+from .architect import Architect
+from .dataset import darts_dataset_from_ndarray
+from .model_search import Network, DARTSType
+from .utils import get_loss_function, get_output_format, AvgrageMeter, \
+    format_input_target, get_output_str
+from .visualize import darts_model_plot
 
 _logger = logging.getLogger(__name__)
 
