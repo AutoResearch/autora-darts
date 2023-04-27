@@ -9,17 +9,13 @@
       
       
       
-        <link rel="prev" href="../example/">
-      
-      
-        <link rel="next" href="../reference/autora/theorist/darts/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
     
     
       
-        <title>Weber-Fechner Law - AutoRA DARTS Theorist</title>
+        <title>Weber - AutoRA DARTS Theorist</title>
       
     
     
@@ -93,7 +89,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Weber-Fechner Law
+              Weber
             
           </span>
         </div>
@@ -243,16 +239,14 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
       
       
       
@@ -261,7 +255,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           Examples
@@ -277,28 +271,6 @@
       <a href="../example/" class="md-nav__link">
         Basic Usage
       </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        Weber-Fechner Law
-      </a>
-      
     </li>
   
 
@@ -599,7 +571,7 @@
   
 
 
-  <h1>Weber-Fechner Law</h1>
+  <h1>Weber</h1>
 
 <script>
 (function (global, factory) {
@@ -1677,8 +1649,8 @@ Licensed under the Apache License, Version 2.0.
 </div>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -1709,7 +1681,7 @@ Licensed under the Apache License, Version 2.0.
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
 
 <span class="kn">from</span> <span class="nn">autora.theorist.darts</span> <span class="kn">import</span> <span class="n">DARTSRegressor</span>
-<span class="kn">from</span> <span class="nn">autora.synthetic</span> <span class="kn">import</span> <span class="n">retrieve</span><span class="p">,</span> <span class="n">describe</span>
+<span class="kn">from</span> <span class="nn">autora.synthetic.inventory</span> <span class="kn">import</span> <span class="n">retrieve</span><span class="p">,</span> <span class="n">describe</span>
 </pre></div>
 <div id="cell-2" class="clipboard-copy-txt">from functools import partial
 
@@ -1722,55 +1694,12 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import PolynomialFeatures
 
 from autora.theorist.darts import DARTSRegressor
-from autora.synthetic import retrieve, describe</div>
+from autora.synthetic.inventory import retrieve, describe</div>
         
         </div>
     </div>
 
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[2], line 12</span>
-<span class="ansi-green-intense-fg ansi-bold">      9</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">sklearn</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">preprocessing</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> PolynomialFeatures
-<span class="ansi-green-intense-fg ansi-bold">     11</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">autora</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">theorist</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">darts</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> DARTSRegressor
-<span class="ansi-green-fg">---&gt; 12</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">autora</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">synthetic</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> retrieve, describe
-
-File <span class="ansi-green-fg">~/Developer/autora-darts/venv/lib/python3.8/site-packages/autora/synthetic/__init__.py:70</span>
-<span class="ansi-green-intense-fg ansi-bold">      1</span> <span style="color: rgb(175,0,0)">&#34;&#34;&#34;</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> <span style="color: rgb(175,0,0)">Provides an interface for loading and saving synthetic experiments.</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> 
-<span class="ansi-green-fg">   (...)</span>
-<span class="ansi-green-intense-fg ansi-bold">     67</span> <span style="color: rgb(175,0,0)">    array([-0.53610647,  0.58457307])</span>
-<span class="ansi-green-intense-fg ansi-bold">     68</span> <span style="color: rgb(175,0,0)">&#34;&#34;&#34;</span>
-<span class="ansi-green-fg">---&gt; 70</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">autora</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">synthetic</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> data
-<span class="ansi-green-intense-fg ansi-bold">     71</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">autora</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">synthetic</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">inventory</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> (
-<span class="ansi-green-intense-fg ansi-bold">     72</span>     Inventory,
-<span class="ansi-green-intense-fg ansi-bold">     73</span>     SyntheticExperimentCollection,
-<span class="ansi-green-fg">   (...)</span>
-<span class="ansi-green-intense-fg ansi-bold">     76</span>     retrieve,
-<span class="ansi-green-intense-fg ansi-bold">     77</span> )
-
-<span class="ansi-red-fg">ImportError</span>: cannot import name &#39;data&#39; from partially initialized module &#39;autora.synthetic&#39; (most likely due to a circular import) (/Users/jholla10/Developer/autora-darts/venv/lib/python3.8/site-packages/autora/synthetic/__init__.py)</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div>
@@ -1780,7 +1709,7 @@ File <span class="ansi-green-fg">~/Developer/autora-darts/venv/lib/python3.8/sit
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1877,13 +1806,13 @@ def show_results_complete(
 </div>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1914,6 +1843,47 @@ data = pd.DataFrame(np.column_stack([X, y]), columns=["S1", "S2", "difference_de
     </div>
 
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyError</span>                                  Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[4], line 2</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span style="color: rgb(95,135,135)"># %% Load the data</span>
+<span class="ansi-green-fg">----&gt; 2</span> s <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">retrieve</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#34;</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">weber_fechner</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#34;</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg">rng</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">np</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">random</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">default_rng</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">seed</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">180</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">resolution</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">20</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span> X <span style="color: rgb(98,98,98)">=</span> s<span style="color: rgb(98,98,98)">.</span>domain()
+<span class="ansi-green-intense-fg ansi-bold">      4</span> y <span style="color: rgb(98,98,98)">=</span> s<span style="color: rgb(98,98,98)">.</span>experiment_runner(X)
+
+File <span class="ansi-green-fg">~/Developer/autora-darts/venv/lib/python3.11/site-packages/autora/synthetic/inventory.py:177</span>, in <span class="ansi-cyan-fg">retrieve</span><span class="ansi-blue-fg">(id_, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    167</span> <span class="ansi-bold" style="color: rgb(0,135,0)">def</span> <span style="color: rgb(0,0,255)">retrieve</span>(id_: <span style="color: rgb(0,135,0)">str</span>, <span style="color: rgb(98,98,98)">*</span><span style="color: rgb(98,98,98)">*</span>kwargs) <span style="color: rgb(98,98,98)">-</span><span style="color: rgb(98,98,98)">&gt;</span> SyntheticExperimentCollection:
+<span class="ansi-green-intense-fg ansi-bold">    168</span> <span style="color: rgb(188,188,188)">    </span><span style="color: rgb(175,0,0)">&#34;&#34;&#34;</span>
+<span class="ansi-green-intense-fg ansi-bold">    169</span> <span style="color: rgb(175,0,0)">    Retrieve a synthetic experiment from the Inventory.</span>
+<span class="ansi-green-intense-fg ansi-bold">    170</span> 
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-intense-fg ansi-bold">    175</span> <span style="color: rgb(175,0,0)">        the synthetic experiment</span>
+<span class="ansi-green-intense-fg ansi-bold">    176</span> <span style="color: rgb(175,0,0)">    &#34;&#34;&#34;</span>
+<span class="ansi-green-fg">--&gt; 177</span>     closure: _SyntheticExperimentClosure <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">Inventory</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg">id_</span><span class="ansi-yellow-bg">]</span>
+<span class="ansi-green-intense-fg ansi-bold">    178</span>     evaluated_closure <span style="color: rgb(98,98,98)">=</span> closure(<span style="color: rgb(98,98,98)">*</span><span style="color: rgb(98,98,98)">*</span>kwargs)
+<span class="ansi-green-intense-fg ansi-bold">    179</span>     evaluated_closure<span style="color: rgb(98,98,98)">.</span>closure <span style="color: rgb(98,98,98)">=</span> closure
+
+<span class="ansi-red-fg">KeyError</span>: &#39;weber_fechner&#39;</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div>
