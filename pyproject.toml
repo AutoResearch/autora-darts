@@ -3,7 +3,7 @@
 name = "autora-theorist-darts"
 description = "Differentiable Architecture Search theorist for AutoRA"
 authors = [
-    { name = "Sebastian Musslick", email = "sebastian_musslick@brown.edu" },
+  { name = "Sebastian Musslick", email = "sebastian_musslick@brown.edu" },
   { name = "John Gerrard Holland", email = "john_holland1@brown.edu" },
 ]
 dynamic = ["version"]
