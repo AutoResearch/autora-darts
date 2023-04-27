@@ -26,6 +26,9 @@ plugins:
     ignore_h1_titles: true
 
 markdown_extensions:
+  admonition: {}
+  pymdownx.details: {}
+  pymdownx.superfences: {}
   pymdownx.arithmatex: # required for equation display
     generic: true
 
