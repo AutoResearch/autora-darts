@@ -5,7 +5,7 @@ site_name: AutoRA DARTS Theorist
 repo_url: 'https://github.com/autoresearch/autora-darts'
 
 nav:
-- Introduction: 'introduction.md'
+- Introduction: 'index.md'
 - Quickstart: "quickstart.md"
 - How it works: 'how_it_works.md'
 - Meta parameters: 'meta_parameters.md'
