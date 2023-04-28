@@ -11,7 +11,7 @@ You will need:
 Install DARTS as part of the `autora` package:
 
 ```shell
-pip install -U "autora[theorist-darts]"
+pip install -U "autora-theorist-darts"
 ```
 
 !!! success
