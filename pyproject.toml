@@ -1,5 +1,4 @@
 [project]
-# UPDATE THIS BEFORE PUBLISHING
 name = "autora-theorist-darts"
 description = "Differentiable Architecture Search theorist for AutoRA"
 authors = [
