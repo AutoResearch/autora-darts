@@ -7,10 +7,10 @@ repo_url: 'https://github.com/autoresearch/autora-darts'
 nav:
 - Introduction: 'index.md'
 - Quickstart: "quickstart.md"
-- How it works: 'how_it_works.md'
-- Meta parameters: 'meta_parameters.md'
-- Search space: 'search_space.md'
+- How it works: 'how-it-works.md'
+- Meta parameters: 'meta-parameters.md'
+- Search space: 'search-space.md'
 - Examples:
-  - Basic Usage: 'example.ipynb'
-  - Weber-Fechner Law: 'weber.ipynb'
+  - Basic Usage: 'basic-usage.ipynb'
+  - Weber-Fechner Law: 'weber-fechner-example.ipynb'
 - Code Reference: reference/
