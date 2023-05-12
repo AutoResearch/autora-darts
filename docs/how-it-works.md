@@ -1,4 +1,4 @@
-# How it works
+# How It Works
 
 Regular DARTS treats the architecture of a neural network as a directed acyclic computation graph (DAG), containing $N$ nodes in sequential order.
 
