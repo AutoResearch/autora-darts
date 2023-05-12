@@ -13,4 +13,3 @@ nav:
 - Examples:
   - Basic Usage: 'basic-usage.ipynb'
   - Weber-Fechner Law: 'weber-fechner-example.ipynb'
-- Code Reference: reference/
