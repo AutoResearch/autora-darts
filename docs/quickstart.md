@@ -1,6 +1,4 @@
-# Differentiable Architecture Search
-
-## Quickstart Guide
+# Quickstart Guide
 
 You will need:
 

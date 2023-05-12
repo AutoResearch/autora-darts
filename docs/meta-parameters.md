@@ -1,15 +1,13 @@
-# Differentiable Architecture Search
-
-## Meta-Parameters
+# Meta-Parameters
 
 Meta-parameters are used to control the search space and the search algorithm. DARTS has quite a lot of those parameters. This section provides a basic overview of all parameters along with a description of their effects. 
 
-### General DARTS meta-parameters
+## General DARTS meta-parameters
 
 - **`num_graph_nodes`**: The number of latent variables used to represent the model.
 - **`max_epochs`**: The maximum number of epochs to run DARTS. This corresponds to the total number of architecture updates. These updates affect the architecture weights $\alpha$ indicating the relative contribution of each operation for a given computation step.
 
-### Meta-parameters for the architecture updates
+## Meta-parameters for the architecture updates
 The following parameters affect the updating of the architecture weights $\alpha$:
 
 - **`arch_learning_rate_max`**: The initial (maximum) learning rate for updating the architecture updates. The higher the learning rate, the larger the steps taken to update the architecture weights. The learning rate decays with each epoch.
