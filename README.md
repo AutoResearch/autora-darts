@@ -1,4 +1,4 @@
-# AutoRA DARTS Theorist
+# Differentiable Architecture Search
 
 `autora-theorist-darts` is a Python module for fitting data using differentiable architecture 
 search, built on AutoRA.
