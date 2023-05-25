@@ -11,5 +11,5 @@ nav:
 - Meta parameters: 'meta-parameters.md'
 - Search space: 'search-space.md'
 - Examples:
-  - Basic Usage: 'basic-usage.ipynb'
-  - Weber-Fechner Law: 'weber-fechner-example.ipynb'
+  - Basic Usage: 'Basic Usage.ipynb'
+  - Weber-Fechner Law: 'Weber Fechner Example.ipynb'
