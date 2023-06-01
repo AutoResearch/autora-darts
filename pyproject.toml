@@ -22,7 +22,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "autora-core[dev]",
-    "autora-synthetic-data"
+    "autora-synthetic"
 ]
 
 [project.urls]
