@@ -8,7 +8,7 @@ authors = [
 dynamic = ["version"]
 
 readme = "README.md"
-license = { text = "MIT License" }
+license = { file = "LICENSE" }
 
 dependencies = [
     "autora-core",
