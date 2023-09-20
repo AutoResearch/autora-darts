@@ -88,7 +88,6 @@ def get_operation_label(
         else:
             classifier_str = input_var + " .* ("
         for param_idx, param in enumerate(params):
-
             if param_idx > 0:
                 if output_format == "latex":
                     classifier_str += " + \\left("
@@ -96,7 +95,6 @@ def get_operation_label(
                     classifier_str += " .+ ("
 
             if isiterable(param.tolist()):
-
                 param_formatted = list()
                 for value in param.tolist():
                     param_formatted.append(format_string.format(value))
@@ -541,7 +539,6 @@ class Softminus(nn.Module):
 
 
 def operation_factory(name):
-
     if name == "none":
         return Zero(1)
     elif name == "add":
