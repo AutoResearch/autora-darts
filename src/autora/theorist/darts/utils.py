@@ -267,14 +267,10 @@ def count_parameters_in_MB(model: Network) -> int:
     Arguments:
         model: model to count the parameters for
     """
-    return (
-        np.sum(  # type: ignore
-            np.prod(v.size())
-            for name, v in model.named_parameters()
-            if "auxiliary" not in name
-        )
-        / 1e6
-    )
+    for name, v in model.named_parameters():
+        if "auxiliary" not in name:
+            count_var = np.prod(v.size())
+    return np.sum(count_var) / 1e6
 
 
 def save(model: torch.nn.Module, model_path: str, exp_folder: Optional[str] = None):
