@@ -134,7 +134,6 @@ def compute_BIC(
     elif output_type == ValueType.PROBABILITY_SAMPLE:
         llik = 0
         for idx in range(len(target)):
-
             # fail safe if model doesn't produce probabilities
             if prediction[idx] > 1:
                 prediction[idx] = 1
@@ -166,7 +165,7 @@ def compute_BIC(
 
 
 def compute_BIC_AIC(
-    soft_targets: np.array, soft_prediction: np.array, model: Network
+    soft_targets: np.ndarray, soft_prediction: np.ndarray, model: Network
 ) -> Tuple:
     """
     Returns the Bayesian information criterion (BIC) as well as the
@@ -268,14 +267,10 @@ def count_parameters_in_MB(model: Network) -> int:
     Arguments:
         model: model to count the parameters for
     """
-    return (
-        np.sum(
-            np.prod(v.size())
-            for name, v in model.named_parameters()
-            if "auxiliary" not in name
-        )
-        / 1e6
-    )
+    for name, v in model.named_parameters():
+        if "auxiliary" not in name:
+            count_var = np.prod(v.size())
+    return np.sum(count_var) / 1e6
 
 
 def save(model: torch.nn.Module, model_path: str, exp_folder: Optional[str] = None):
@@ -363,7 +358,6 @@ def read_log_files(results_path: str, winning_architecture_only: bool = False) -
 
     print("Reading log files... ")
     for file in filelist:
-
         with open(file) as csvfile:
             readCSV = csv.reader(csvfile, delimiter=",")
             for row in readCSV:

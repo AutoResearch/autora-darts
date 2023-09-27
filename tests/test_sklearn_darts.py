@@ -12,8 +12,8 @@ from autora.theorist.darts import (
     DARTSRegressor,
     DARTSType,
 )
-
 from autora.variable import ValueType
+
 
 @pytest.fixture
 def seed():
@@ -63,7 +63,6 @@ def generate_noisy_linear_data(
 
 
 def test_constant_model(seed):
-
     X, y, const, epsilon = generate_noisy_constant_data()
 
     X_train, X_test, y_train, y_test = train_test_split(
@@ -83,7 +82,6 @@ def test_constant_model(seed):
 
 
 def test_enum_string_inputs():
-
     X, y, const, epsilon = generate_noisy_constant_data()
 
     kwargs = dict(
@@ -110,7 +108,6 @@ def test_enum_string_inputs():
 
 
 def test_model_repr():
-
     X, y, const, epsilon = generate_noisy_constant_data()
 
     kwargs = dict(
@@ -211,7 +208,6 @@ def test_fit_with_fixed_architecture():
 
 
 def test_metaparam_optimization():
-
     X, y, const = generate_constant_data()
 
     X_train, X_test, y_train, y_test = train_test_split(
@@ -234,7 +230,6 @@ def test_metaparam_optimization():
 
 
 def test_execution_monitor():
-
     X, y, const, epsilon = generate_noisy_constant_data()
 
     kwargs = dict()
@@ -275,7 +270,6 @@ def test_execution_monitor():
 
 
 def test_label_getter():
-
     X, y, _ = generate_constant_data(num=10)
     df = pd.DataFrame(
         {

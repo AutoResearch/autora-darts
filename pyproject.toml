@@ -25,6 +25,16 @@ dev = [
     "autora-synthetic"
 ]
 
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+mypy_path="./src"
+
+[[tool.mypy.overrides]]
+module = ["matplotlib.*", "autora.*", "sklearn.*", "torch.*", "graphviz.*", "mkdocs_gen_files.*", "pandas.*", "numpy.*","scipy.*"]
+ignore_missing_imports=true
+
 [project.urls]
 homepage = "http://www.empiricalresearch.ai"
 repository = "https://github.com/AutoResearch/autora-theorist-darts"

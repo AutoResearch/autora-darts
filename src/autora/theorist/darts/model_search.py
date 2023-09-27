@@ -505,6 +505,7 @@ class Network(nn.Module):
         Returns:
             genotype: genotype describing the current (sampled) architecture
         """
+
         # this function uses the architecture weights to retrieve the
         # operations with the highest weights
         def _parse(weights):
@@ -613,9 +614,7 @@ class Network(nn.Module):
 
             tmp_param_list = list()
             if isiterable(op._ops[maxIdx[0].item(0)]):  # Zero is not iterable
-
                 for subop in op._ops[maxIdx[0].item(0)]:
-
                     for parameter in subop.parameters():
                         tmp_param_list.append(parameter.data.numpy().squeeze())
                         if parameter.requires_grad is True:

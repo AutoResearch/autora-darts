@@ -17,12 +17,17 @@ from tqdm.auto import tqdm
 
 from autora.variable import ValueType
 
-from .operations import PRIMITIVES
 from .architect import Architect
 from .dataset import darts_dataset_from_ndarray
-from .model_search import Network, DARTSType
-from .utils import get_loss_function, get_output_format, AvgrageMeter, \
-    format_input_target, get_output_str
+from .model_search import DARTSType, Network
+from .operations import PRIMITIVES
+from .utils import (
+    AvgrageMeter,
+    format_input_target,
+    get_loss_function,
+    get_output_format,
+    get_output_str,
+)
 from .visualize import darts_model_plot
 
 _logger = logging.getLogger(__name__)
@@ -161,7 +166,6 @@ def _general_darts(
     network.train()
 
     for epoch in _progress_indicator(range(max_epochs)):
-
         _logger.debug(f"Running fit, epoch {epoch}")
 
         data_iterator = _get_data_iterator(data_loader)
@@ -842,7 +846,7 @@ class DARTSExecutionMonitor:
 
         arch_fig.suptitle("Architecture Weights", fontsize=10)
 
-        for (edge_i, ax) in zip(range(num_edges), arch_axes.flat):
+        for edge_i, ax in zip(range(num_edges), arch_axes.flat):
             for primitive_i in range(num_primitives):
                 print(f"{edge_i}, {primitive_i}, {ax}")
                 ax.plot(
