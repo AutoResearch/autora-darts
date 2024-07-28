@@ -2,8 +2,8 @@
 name = "autora-theorist-darts"
 description = "Differentiable Architecture Search theorist for AutoRA"
 authors = [
-  { name = "Sebastian Musslick", email = "sebastian_musslick@brown.edu" },
-  { name = "John Gerrard Holland", email = "john_holland1@brown.edu" },
+    { name = "Sebastian Musslick", email = "sebastian_musslick@brown.edu" },
+    { name = "John Gerrard Holland", email = "john_holland1@brown.edu" },
 ]
 dynamic = ["version"]
 
@@ -25,15 +25,19 @@ dev = [
     "autora-synthetic"
 ]
 
+docs = [
+    "autora-core[docs]",
+]
+
 [tool.isort]
 profile = "black"
 
 [tool.mypy]
-mypy_path="./src"
+mypy_path = "./src"
 
 [[tool.mypy.overrides]]
-module = ["matplotlib.*", "autora.*", "sklearn.*", "torch.*", "graphviz.*", "mkdocs_gen_files.*", "pandas.*", "numpy.*","scipy.*"]
-ignore_missing_imports=true
+module = ["matplotlib.*", "autora.*", "sklearn.*", "torch.*", "graphviz.*", "mkdocs_gen_files.*", "pandas.*", "numpy.*", "scipy.*"]
+ignore_missing_imports = true
 
 [project.urls]
 homepage = "http://www.empiricalresearch.ai"
