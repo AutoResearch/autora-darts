@@ -628,8 +628,9 @@ class DARTSRegressor(BaseEstimator, RegressorMixin):
         # ensures the self.model_ parameter is initialized and otherwise throws an error,
         # so we check that explicitly here and pass the model which can't be None.
         assert self.model_ is not None
-
-        y_ = self.model_(torch.as_tensor(X_).float())
+        
+        dtype = next(self.model_.parameters()).dtype
+        y_ = self.model_(torch.as_tensor(X_).to(dtype))
         y = y_.detach().numpy()
 
         return y
