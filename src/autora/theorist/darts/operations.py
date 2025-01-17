@@ -253,13 +253,14 @@ def get_operation_as_sympy(
     c = params_org
     num_params = len(c)
 
-    logistic = lambda x: 1 / (1 + sympy.exp(-x))
+    def logistic(x):
+        return 1 / (1 + sympy.exp(-x))
 
-    if len(c) == 2:
+    if num_params == 2:
         labels = {
             "linear": lambda input_var, c: c[0] * input_var + c[1],
             "linear_relu": lambda input_var, c: sympy.Piecewise(
-                (c_0 * input_var + c_1, c_0 * input_var + c_1 > 0), (0, True)
+                (c[0] * input_var + c[1], c[0] * input_var + c[1] > 0), (0, True)
             ),
             "linear_logistic": lambda input_var, c: logistic(c[0] * input_var + c[1]),
             "linear_exp": lambda input_var, c: sympy.exp(c[0] * input_var + c[1]),
