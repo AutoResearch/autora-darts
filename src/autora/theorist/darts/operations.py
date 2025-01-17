@@ -3,6 +3,8 @@ from collections import namedtuple
 
 import torch
 import torch.nn as nn
+import sympy
+from sympy.core.expr import Expr
 
 Genotype = namedtuple("Genotype", "normal normal_concat")
 
@@ -232,6 +234,79 @@ def get_operation_label(
         )
 
     return labels[op_name]
+
+
+def get_operation_as_sympy(
+    op_name: str,
+    params_org: typing.List,
+    input_var: Expr,
+) -> Expr:
+    r"""
+    Returns a sympy expression describing a DARTS operation.
+
+    Arguments:
+        op_name: name of the operation
+        params_org: original parameters of the operation
+        input_var: sympy expression of the input node
+    """
+    # convention: c for list of constants
+    c = params_org
+    num_params = len(c)
+
+    logistic = lambda x: 1 / (1 + sympy.exp(-x))
+
+    if len(c) == 2:
+        labels = {
+            "linear": lambda input_var, c: c[0] * input_var + c[1],
+            "linear_relu": lambda input_var, c: sympy.Piecewise(
+                (c_0 * input_var + c_1, c_0 * input_var + c_1 > 0), (0, True)
+            ),
+            "linear_logistic": lambda input_var, c: logistic(c[0] * input_var + c[1]),
+            "linear_exp": lambda input_var, c: sympy.exp(c[0] * input_var + c[1]),
+            "linear_reciprocal": lambda input_var, c: 1 / (c[0] * input_var + c[1]),
+            "linear_ln": lambda input_var, c: sympy.log(c[0] * input_var + c[1]),
+            "linear_cos": lambda input_var, c: sympy.cos(c[0] * input_var + c[1]),
+            "linear_sin": lambda input_var, c: sympy.sin(c[0] * input_var + c[1]),
+            "linear_tanh": lambda input_var, c: sympy.tanh(c[0] * input_var + c[1]),
+        }
+    else:
+        labels = {
+            "none": "",
+            "add": lambda input_var: input_var,
+            "subtract": lambda input_var: -input_var,
+            "mult": lambda input_var, c: c[0] * input_var,
+            "linear": lambda input_var, c: c[0] * input_var,
+            "relu": lambda input_var: sympy.Piecewise(
+                (input_var, input_var > 0), (0, True)
+            ),
+            "linear_relu": lambda input_var, c: sympy.Piecewise(
+                (c[0] * input_var, c[0] * input_var > 0), (0, True)
+            ),
+            "logistic": lambda input_var, c: logistic(input_var),
+            "linear_logistic": lambda input_var, c: logistic(c[0] * input_var),
+            "exp": lambda input_var: sympy.exp(input_var),
+            "linear_exp": lambda input_var, c: sympy.exp(c[0] * input_var),
+            "reciprocal": lambda input_var: 1 / input_var,
+            "linear_reciprocal": lambda input_var, c: 1 / (c[0] * input_var),
+            "ln": lambda input_var: sympy.log(input_var),
+            "linear_ln": lambda input_var, c: sympy.log(c[0] * input_var),
+            "cos": lambda input_var: sympy.cos(input_var),
+            "linear_cos": lambda input_var, c: sympy.cos(c[0] * input_var),
+            "sin": lambda input_var: sympy.sin(input_var),
+            "linear_sin": lambda input_var, c: sympy.sin(c[0] * input_var),
+            "tanh": lambda input_var: sympy.tanh(input_var),
+            "linear_tanh": lambda input_var, c: sympy.tanh(c[0] * input_var),
+        }
+
+    if op_name not in labels:
+        raise NotImplementedError(f"operation '{op_name}' is not defined")
+
+    if len(c):
+        function = labels[op_name](input_var, c)
+    else:
+        function = labels[op_name](input_var)
+
+    return function
 
 
 class Identity(nn.Module):
