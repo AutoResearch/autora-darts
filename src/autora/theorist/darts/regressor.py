@@ -13,8 +13,8 @@ import torch.utils.data
 from matplotlib import pyplot as plt
 from sklearn.base import BaseEstimator, RegressorMixin
 from sklearn.utils.validation import check_array, check_is_fitted, check_X_y
-from tqdm.auto import tqdm
 from sympy.core.expr import Expr
+from tqdm.auto import tqdm
 
 from autora.variable import ValueType
 

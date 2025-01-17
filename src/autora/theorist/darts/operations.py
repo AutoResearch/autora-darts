@@ -1,9 +1,9 @@
 import typing
 from collections import namedtuple
 
+import sympy
 import torch
 import torch.nn as nn
-import sympy
 from sympy.core.expr import Expr
 
 Genotype = namedtuple("Genotype", "normal normal_concat")

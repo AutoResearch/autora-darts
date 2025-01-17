@@ -4,19 +4,19 @@ from enum import Enum
 from typing import Callable, List, Literal, Optional, Sequence, Tuple
 
 import numpy as np
+import sympy
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.autograd import Variable
-import sympy
 from sympy.core.expr import Expr
+from torch.autograd import Variable
 
 from autora.theorist.darts.fan_out import Fan_Out
 from autora.theorist.darts.operations import (
     PRIMITIVES,
     Genotype,
-    get_operation_label,
     get_operation_as_sympy,
+    get_operation_label,
     isiterable,
     operation_factory,
 )
@@ -849,7 +849,6 @@ class Network(nn.Module):
 
         # output layer/"classifier"
         for i in range(steps):
-
             param_idx = len(param_list) - steps + i
             tmp_param_list = param_list[param_idx]
 
