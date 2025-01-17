@@ -17,6 +17,7 @@ dependencies = [
     "matplotlib",
     "graphviz",
     "tqdm",
+    "sympy",
 ]
 
 [project.optional-dependencies]
