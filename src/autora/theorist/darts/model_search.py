@@ -4,15 +4,18 @@ from enum import Enum
 from typing import Callable, List, Literal, Optional, Sequence, Tuple
 
 import numpy as np
+import sympy
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from sympy.core.expr import Expr
 from torch.autograd import Variable
 
 from autora.theorist.darts.fan_out import Fan_Out
 from autora.theorist.darts.operations import (
     PRIMITIVES,
     Genotype,
+    get_operation_as_sympy,
     get_operation_label,
     isiterable,
     operation_factory,
@@ -793,3 +796,73 @@ class Network(nn.Module):
         edge_list.append(classifier_str)
 
         return edge_list
+
+    def architecture_to_sympy(
+        self,
+        input_labels: Sequence[str],
+    ) -> Expr:
+        """
+        Returns a sympy expression representing the model.
+
+        Arguments:
+            input_labels: list of strings representing the input states.
+
+        Returns:
+            sympy expression representing the model
+        """
+        (_, _, param_list) = self.count_parameters(print_parameters=False)
+        genotype = self.genotype().normal
+        steps = self._steps
+        input_symbols = sympy.symbols(input_labels)
+        node_symbols = list()
+
+        n = len(input_labels)
+        start = 0
+        for i in range(steps):  # for every node
+            end = start + n
+            # for k in [2*i, 2*i + 1]:
+
+            edge_operations_list = list()
+
+            for k in range(start, end):
+                op, j = genotype[k]
+                if j < len(input_labels):
+                    symbol = input_symbols[j]
+                else:
+                    symbol = node_symbols[j - len(input_labels)]
+                if op != "none":
+                    params = param_list[
+                        start + j
+                    ]  # note: genotype order and param list order don't align
+
+                    edge_operation = get_operation_as_sympy(op, params, symbol)
+                    edge_operations_list.append(edge_operation)
+
+            node_function = np.sum(edge_operations_list)
+            node_symbols.append(node_function)
+
+            start = end
+            n += 1
+
+        bias = None
+        sub_term_list = list()
+
+        # output layer/"classifier"
+        for i in range(steps):
+            param_idx = len(param_list) - steps + i
+            tmp_param_list = param_list[param_idx]
+
+            sub_term = get_operation_as_sympy(
+                "mult", tmp_param_list[0], node_symbols[i]
+            )
+
+            if i == 0 and len(tmp_param_list) == 2:
+                # bias is trained inside the first sub-term
+                bias = tmp_param_list[1][0]
+                # sympy will put the bias at the end of the complete function
+                sub_term += bias
+
+            sub_term_list.append(sub_term)
+
+        function = np.sum(sub_term_list)
+        return function

@@ -13,6 +13,7 @@ import torch.utils.data
 from matplotlib import pyplot as plt
 from sklearn.base import BaseEstimator, RegressorMixin
 from sklearn.utils.validation import check_array, check_is_fitted, check_X_y
+from sympy.core.expr import Expr
 from tqdm.auto import tqdm
 
 from autora.variable import ValueType
@@ -774,6 +775,34 @@ class DARTSRegressor(BaseEstimator, RegressorMixin):
         model_repr_ = "\n".join(["Model:"] + edge_list)
         return model_repr_
 
+    def to_sympy(
+        self,
+        input_labels: Optional[Sequence[str]] = None,
+    ) -> Expr:
+        """
+        Returns a sympy version of the model architecture.
+
+        Args:
+            input_labels: which names to use for the independent variables (X)
+
+        Returns:
+            A simplified function, whis is equivalent to the model architecture
+
+        """
+        assert self.model_ is not None
+        fitted_sampled_network: Network = self.model_[0]
+
+        if input_labels is None:
+            input_labels_ = self._get_input_labels()
+        else:
+            input_labels_ = input_labels
+
+        sympy_repr = fitted_sampled_network.architecture_to_sympy(
+            input_labels=input_labels_,
+        )
+
+        return sympy_repr
+
 
 class DARTSExecutionMonitor:
     """
@@ -848,7 +877,6 @@ class DARTSExecutionMonitor:
 
         for edge_i, ax in zip(range(num_edges), arch_axes.flat):
             for primitive_i in range(num_primitives):
-                print(f"{edge_i}, {primitive_i}, {ax}")
                 ax.plot(
                     arch_weight_history_array[:, edge_i, primitive_i],
                     label=f"{self.primitives[primitive_i]}",
