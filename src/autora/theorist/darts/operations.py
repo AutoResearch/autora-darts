@@ -147,6 +147,10 @@ def get_operation_label(
                 "linear_sin": f"sin({c[0]} * {input_var})",
                 "tanh": f"tanh({input_var})",
                 "linear_tanh": f"tanh({c[0]} * {input_var})",
+                "power_two": f"{input_var}**2",
+                "linear_power_two": f"({c[0]} * {input_var})**2",
+                "power_three": f"{input_var}**3",
+                "linear_power_three": f"({c[0]} * {input_var})**3",
                 "classifier": classifier_str,
             }
         elif output_format == "latex":
@@ -172,6 +176,10 @@ def get_operation_label(
                 "linear_sin": f"\\sin\\left({c[0]} {input_var} \\right)",
                 "tanh": f"\\tanh\\left({input_var}\\right)",
                 "linear_tanh": f"\\tanh\\left({c[0]} {input_var} \\right)",
+                "power_two": f"{input_var}^2",
+                "linear_power_two": f"({c[0]} {input_var})^2",
+                "power_three": f"{input_var}^3",
+                "linear_power_three": f"({c[0]} {input_var})^3",
                 "classifier": classifier_str,
             }
     else:  # with bias
@@ -198,6 +206,10 @@ def get_operation_label(
                 "linear_sin": f"sin({c[0]} * {input_var} + {c[1]})",
                 "tanh": f"tanh({input_var})",
                 "linear_tanh": f"tanh({c[0]} * {input_var} + {c[1]})",
+                "power_two": f"{input_var}**2",
+                "linear_power_two": f"({c[0]} * {input_var} + {c[1]})**2",
+                "power_three": f"{input_var}**3",
+                "linear_power_three": f"({c[0]} * {input_var} + {c[1]})**3",
                 "classifier": classifier_str,
             }
         elif output_format == "latex":
@@ -223,6 +235,10 @@ def get_operation_label(
                 "linear_sin": f"\\sin\\left({c[0]} {input_var} + {c[1]} \\right)",
                 "tanh": f"\\tanh\\left({input_var}\\right)",
                 "linear_tanh": f"\\tanh\\left({c[0]} {input_var} + {c[1]} \\right)",
+                "power_two": f"{input_var}^2",
+                "linear_power_two": f"({c[0]} * {input_var} + {c[1]})^2",
+                "power_three": f"{input_var}^3",
+                "linear_power_three": f"({c[0]} * {input_var} + {c[1]})^3",
                 "classifier": classifier_str,
             }
 
@@ -640,6 +656,44 @@ def operation_factory(name):
         return nn.Sequential(
             nn.Linear(1, 1, bias=False),
             Softminus(),
+        )
+    elif name == "power_two":
+
+        class Power2(nn.Module):
+            def forward(self, x):
+                return x**2
+
+        return nn.Sequential(
+            Power2(),
+        )
+    elif name == "linear_power_two":
+
+        class Power2(nn.Module):
+            def forward(self, x):
+                return x**2
+
+        return nn.Sequential(
+            nn.Linear(1, 1, bias=False),
+            Power2(),
+        )
+    elif name == "power_three":
+
+        class Power3(nn.Module):
+            def forward(self, x):
+                return x**3
+
+        return nn.Sequential(
+            Power3(),
+        )
+    elif name == "linear_power_three":
+
+        class Power3(nn.Module):
+            def forward(self, x):
+                return x**3
+
+        return nn.Sequential(
+            nn.Linear(1, 1, bias=False),
+            Power3(),
         )
     else:
         raise NotImplementedError(f"operation {name=} it not implemented")
