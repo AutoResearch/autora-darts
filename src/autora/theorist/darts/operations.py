@@ -285,6 +285,8 @@ def get_operation_as_sympy(
             "linear_cos": lambda input_var, c: sympy.cos(c[0] * input_var + c[1]),
             "linear_sin": lambda input_var, c: sympy.sin(c[0] * input_var + c[1]),
             "linear_tanh": lambda input_var, c: sympy.tanh(c[0] * input_var + c[1]),
+            "linear_power_two": lambda input_var, c: (c[0] * input_var + c[1]) ** 2,
+            "linear_power_three": lambda input_var, c: (c[0] * input_var + c[1]) ** 3,
         }
     else:
         labels = {
@@ -313,6 +315,10 @@ def get_operation_as_sympy(
             "linear_sin": lambda input_var, c: sympy.sin(c[0] * input_var),
             "tanh": lambda input_var: sympy.tanh(input_var),
             "linear_tanh": lambda input_var, c: sympy.tanh(c[0] * input_var),
+            "power_two": lambda input_var, c: input_var**2,
+            "linear_power_two": lambda input_var, c: (c[0] * input_var) ** 2,
+            "power_three": lambda input_var, c: input_var**3,
+            "linear_power_three": lambda input_var, c: (c[0] * input_var) ** 3,
         }
 
     if op_name not in labels:
