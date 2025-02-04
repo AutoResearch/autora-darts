@@ -3,7 +3,7 @@ import logging
 from dataclasses import dataclass
 from itertools import cycle
 from types import SimpleNamespace
-from typing import Any, Callable, Iterator, Literal, Optional, Sequence, Tuple
+from typing import Any, Callable, Iterator, List, Literal, Optional, Sequence, Tuple
 
 import numpy as np
 import torch
@@ -81,7 +81,10 @@ def _general_darts(
     primitives: Sequence[str] = PRIMITIVES,
     train_classifier_coefficients: bool = False,
     train_classifier_bias: bool = False,
-    execution_monitor: Callable = (lambda *args, **kwargs: None),
+    on_epoch_end: List[Callable] = [],
+    on_arch_step_end: List[Callable] = [],
+    on_coeff_step_end: List[Callable] = [],
+    on_coeff_step_end_finetune: List[Callable] = [],
     sampling_strategy: SAMPLING_STRATEGIES = "max",
 ) -> _DARTSResult:
     """
@@ -118,7 +121,10 @@ def _general_darts(
         primitives: List of primitives (operations) to use.
         train_classifier_coefficients: Whether to train the coefficients of the classifier.
         train_classifier_bias: Whether to train the bias of the classifier.
-        execution_monitor: Function to monitor the execution of the model.
+            on_epoch_end: List of functions that will be called at the end of each epoch.
+            on_arch_step_end: Will be called at the end of each epoch.
+            on_coeff_step_end: Will be called at the end of each coefficient update step.
+            on_coeff_step_end_finetune: Like above, but during finetuning.
 
     Returns:
         A _DARTSResult object containing the fitted model and the network architecture.
@@ -188,6 +194,9 @@ def _general_darts(
                 unrolled=False,
             )
 
+            for callback in on_arch_step_end:
+                callback(**locals())
+
         # Then run the param optimization
         _optimize_coefficients(
             network=network,
@@ -199,9 +208,11 @@ def _general_darts(
             param_momentum=param_momentum,
             param_update_steps=param_updates_per_epoch,
             param_weight_decay=param_weight_decay,
+            on_update_step_end=on_coeff_step_end,
         )
 
-        execution_monitor(**locals())
+        for callback in on_epoch_end:
+            callback(**locals())
 
     model = _generate_model(
         network_=network,
@@ -214,6 +225,7 @@ def _general_darts(
         param_momentum=param_momentum,
         param_weight_decay=param_weight_decay,
         grad_clip=grad_clip,
+        on_coeff_step_end=on_coeff_step_end_finetune,
     )
 
     results = _DARTSResult(model=model, network=network)
@@ -231,6 +243,7 @@ def _optimize_coefficients(
     param_momentum: float,
     param_update_steps: int,
     param_weight_decay: float,
+    on_update_step_end: List[Callable] = [],
 ):
     """
     Function to optimize the coefficients of a DARTS Network.
@@ -247,6 +260,7 @@ def _optimize_coefficients(
         param_learning_rate_min: Final (minimum) learning rate for the operation parameters.
         param_momentum: Momentum for the operation parameters.
         param_weight_decay: Weight decay for the operation parameters.
+        on_update_step_end: Will be called at the end of each update step.
     """
     optimizer = torch.optim.SGD(
         params=network.parameters(),
@@ -263,9 +277,6 @@ def _optimize_coefficients(
     data_iterator = _get_data_iterator(data_loader)
 
     objs = AvgrageMeter()
-
-    if network.count_parameters()[0] == 0:
-        return
 
     for param_step in range(param_update_steps):
         _logger.debug(f"Running parameter update, " f"param: {param_step}")
@@ -296,6 +307,9 @@ def _optimize_coefficients(
         # compute accuracy metrics
         n = X_batch.size(0)
         objs.update(loss.data, n)
+
+        for callback in on_update_step_end:
+            callback(**locals())
 
 
 def _get_data_loader(
@@ -382,6 +396,7 @@ def _generate_model(
     param_momentum: float,
     param_weight_decay: float,
     grad_clip: float,
+    on_coeff_step_end: List[Callable] = [],
 ) -> Network:
     """
     Generate a model architecture from mixed DARTS model.
@@ -397,6 +412,7 @@ def _generate_model(
         param_learning_rate_min: Final (minimum) learning rate for the operation parameters.
         param_momentum: Momentum for the operation parameters.
         param_weight_decay: Weight decay for the operation parameters.
+        on_coeff_step_end: Will be called at the end of each coefficient update step.
 
     Returns:
         A model architecture that is a combination of the trained model and the output function.
@@ -426,6 +442,7 @@ def _generate_model(
         param_momentum=param_momentum,
         param_update_steps=param_update_steps,
         param_weight_decay=param_weight_decay,
+        on_update_step_end=on_coeff_step_end,
     )
 
     # Include the output function
@@ -496,8 +513,11 @@ class DARTSRegressor(BaseEstimator, RegressorMixin):
         primitives: Sequence[str] = PRIMITIVES,
         train_classifier_coefficients: bool = False,
         train_classifier_bias: bool = False,
-        execution_monitor: Callable = (lambda *args, **kwargs: None),
         sampling_strategy: SAMPLING_STRATEGIES = "max",
+        on_epoch_end: List[Callable] = [],
+        on_arch_step_end: List[Callable] = [],
+        on_coeff_step_end: List[Callable] = [],
+        on_coeff_step_end_finetune: List[Callable] = [],
     ) -> None:
         """
         Initializes the DARTSRegressor.
@@ -531,7 +551,10 @@ class DARTSRegressor(BaseEstimator, RegressorMixin):
             primitives: List of primitives (operations) to use.
             train_classifier_coefficients: Whether to train the coefficients of the classifier.
             train_classifier_bias: Whether to train the bias of the classifier.
-            execution_monitor: Function to monitor the execution of the model.
+            on_epoch_end: List of functions that will be called at the end of each epoch.
+            on_arch_step_end: Will be called at the end of each epoch.
+            on_coeff_step_end: Will be called at the end of each coefficient update step.
+            on_coeff_step_end_finetune: Like above, but during finetuning.
             primitives: list of primitive operations used in the DARTS network,
                 e.g., 'add', 'subtract', 'none'. For details, see
                 [`autora.theorist.darts.operations`][autora.theorist.darts.operations]
@@ -576,7 +599,10 @@ class DARTSRegressor(BaseEstimator, RegressorMixin):
         self.train_classifier_coefficients = train_classifier_coefficients
         self.train_classifier_bias = train_classifier_bias
 
-        self.execution_monitor = execution_monitor
+        self.on_epoch_end = on_epoch_end
+        self.on_arch_step_end = on_arch_step_end
+        self.on_coeff_step_end = on_coeff_step_end
+        self.on_coeff_step_end_finetune = on_coeff_step_end_finetune
 
         self.sampling_strategy = sampling_strategy
 
@@ -629,7 +655,8 @@ class DARTSRegressor(BaseEstimator, RegressorMixin):
         # so we check that explicitly here and pass the model which can't be None.
         assert self.model_ is not None
 
-        y_ = self.model_(torch.as_tensor(X_).float())
+        dtype = next(self.model_.parameters()).dtype
+        y_ = self.model_(torch.as_tensor(X_).to(dtype))
         y = y_.detach().numpy()
 
         return y
@@ -848,7 +875,6 @@ class DARTSExecutionMonitor:
 
         for edge_i, ax in zip(range(num_edges), arch_axes.flat):
             for primitive_i in range(num_primitives):
-                print(f"{edge_i}, {primitive_i}, {ax}")
                 ax.plot(
                     arch_weight_history_array[:, edge_i, primitive_i],
                     label=f"{self.primitives[primitive_i]}",
